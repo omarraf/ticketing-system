@@ -11,18 +11,21 @@ variable "project_name" {
 }
 
 variable "vpc_id" {
-  description = "VPC ID where Lambda functions will run"
+  description = "VPC ID where Lambda functions will run (optional for demo)"
   type        = string
+  default     = ""
 }
 
 variable "subnet_ids" {
-  description = "List of subnet IDs for Lambda VPC config (to access Redis)"
+  description = "List of subnet IDs for Lambda VPC config (optional for demo)"
   type        = list(string)
+  default     = []
 }
 
 variable "redis_security_group_id" {
-  description = "Security group ID for Redis cluster"
+  description = "Security group ID for Redis cluster (optional for demo)"
   type        = string
+  default     = ""
 }
 
 variable "redis_endpoint" {

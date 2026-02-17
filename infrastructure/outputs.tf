@@ -18,15 +18,16 @@ output "bookings_table_name" {
   value       = module.dynamodb.bookings_table_name
 }
 
-output "redis_endpoint" {
-  description = "Redis cluster endpoint"
-  value       = module.redis.redis_endpoint
-}
-
-output "redis_port" {
-  description = "Redis cluster port"
-  value       = module.redis.redis_port
-}
+# Redis outputs commented out for minimal demo
+# output "redis_endpoint" {
+#   description = "Redis cluster endpoint"
+#   value       = module.redis.redis_endpoint
+# }
+#
+# output "redis_port" {
+#   description = "Redis cluster port"
+#   value       = module.redis.redis_port
+# }
 
 output "event_bus_name" {
   description = "EventBridge event bus name"

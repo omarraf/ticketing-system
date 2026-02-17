@@ -53,7 +53,8 @@ output "payment_handler_function_arn" {
   value       = aws_lambda_function.payment_handler.arn
 }
 
-output "lambda_security_group_id" {
-  description = "Security group ID for Lambda functions"
-  value       = aws_security_group.lambda.id
-}
+# Security group output commented out for minimal demo
+# output "lambda_security_group_id" {
+#   description = "Security group ID for Lambda functions"
+#   value       = aws_security_group.lambda.id
+# }

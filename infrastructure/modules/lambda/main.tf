@@ -1,39 +1,30 @@
-# Security Group for Lambda Functions
-resource "aws_security_group" "lambda" {
-  name_prefix = "${var.project_name}-lambda-${var.environment}-"
-  description = "Security group for Lambda functions"
-  vpc_id      = var.vpc_id
-
-  # Allow outbound to Redis
-  egress {
-    description     = "Allow Redis access"
-    from_port       = var.redis_port
-    to_port         = var.redis_port
-    protocol        = "tcp"
-    security_groups = [var.redis_security_group_id]
-  }
-
-  # Allow all HTTPS outbound (for AWS services)
-  egress {
-    description = "Allow HTTPS to AWS services"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = merge(
-    var.tags,
-    {
-      Name        = "${var.project_name}-lambda-sg-${var.environment}"
-      Environment = var.environment
-    }
-  )
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
+# Security Group for Lambda Functions (optional - for VPC/Redis access)
+# Commented out for minimal demo without Redis
+# resource "aws_security_group" "lambda" {
+#   name_prefix = "${var.project_name}-lambda-${var.environment}-"
+#   description = "Security group for Lambda functions"
+#   vpc_id      = var.vpc_id
+#
+#   egress {
+#     description = "Allow HTTPS to AWS services"
+#     from_port   = 443
+#     to_port     = 443
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#
+#   tags = merge(
+#     var.tags,
+#     {
+#       Name        = "${var.project_name}-lambda-sg-${var.environment}"
+#       Environment = var.environment
+#     }
+#   )
+#
+#   lifecycle {
+#     create_before_destroy = true
+#   }
+# }
 
 # IAM Role for Lambda Execution
 resource "aws_iam_role" "lambda_execution" {
@@ -209,7 +200,7 @@ resource "aws_lambda_function" "get_seats" {
   )
 }
 
-# Lambda Function: Reserve Seat (needs VPC access for Redis)
+# Lambda Function: Reserve Seat (VPC disabled for minimal demo)
 resource "aws_lambda_function" "reserve_seat" {
   filename         = data.archive_file.lambda_placeholder.output_path
   function_name    = "${var.project_name}-reserve-seat-${var.environment}"
@@ -219,10 +210,11 @@ resource "aws_lambda_function" "reserve_seat" {
   runtime          = "python3.11"
   timeout          = 60
 
-  vpc_config {
-    subnet_ids         = var.subnet_ids
-    security_group_ids = [aws_security_group.lambda.id]
-  }
+  # VPC config commented out for minimal demo (no Redis)
+  # vpc_config {
+  #   subnet_ids         = var.subnet_ids
+  #   security_group_ids = [aws_security_group.lambda.id]
+  # }
 
   environment {
     variables = {
