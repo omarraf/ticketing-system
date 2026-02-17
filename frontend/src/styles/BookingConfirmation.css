@@ -1,0 +1,253 @@
+/* ── Page ───────────────────────────────────────── */
+.confirm-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  animation: fadeUp 0.35s ease-out;
+}
+
+/* ── Card ───────────────────────────────────────── */
+.confirm-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Header ─────────────────────────────────────── */
+.confirm-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 2rem 2rem;
+  background: linear-gradient(180deg, rgba(124,106,247,0.08) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.confirm-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(16,185,129,0.15);
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green);
+  position: relative;
+  z-index: 1;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.confirm-icon-ring {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 1px solid rgba(16,185,129,0.15);
+  border-radius: 50%;
+  animation: ringExpand 0.6s ease-out both;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes ringExpand {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.confirm-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-1);
+}
+
+.confirm-subtext {
+  font-size: 0.9rem;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+/* ── Receipt ────────────────────────────────────── */
+.receipt {
+  border-bottom: 1px solid var(--border);
+}
+
+.receipt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.75rem;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.receipt-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.receipt-id {
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  color: var(--accent);
+  background: rgba(124,106,247,0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.receipt-rows { padding: 0 1.75rem; }
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+.receipt-row:last-child { border-bottom: none; }
+
+.receipt-key { color: var(--text-2); }
+.receipt-val { color: var(--text-1); font-weight: 500; text-align: right; }
+
+.receipt-row--total .receipt-key,
+.receipt-row--total .receipt-val {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.receipt-price {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-1);
+  letter-spacing: -0.02em;
+}
+
+/* ── Progress steps ─────────────────────────────── */
+.progress-steps {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.step-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 2px solid var(--border-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-3);
+  transition: all 0.3s;
+}
+
+.step--done .step-dot {
+  background: rgba(16,185,129,0.15);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.step--active .step-dot {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.step-pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.step-label {
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--text-3);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.step--done .step-label  { color: var(--text-2); }
+.step--active .step-label { color: var(--accent); }
+
+.step-line {
+  flex: 1;
+  min-width: 32px;
+  height: 2px;
+  background: var(--border-2);
+  margin-bottom: 1.25rem;
+  transition: background 0.3s;
+}
+.step-line--done { background: var(--green); }
+
+/* ── Save notice ────────────────────────────────── */
+.save-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 1.75rem;
+  padding: 0.875rem 1rem;
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: #fbbf24;
+  line-height: 1.5;
+}
+
+.save-notice strong {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+}
+
+.save-notice svg { flex-shrink: 0; }
+
+/* ── Actions ────────────────────────────────────── */
+.confirm-actions {
+  padding: 1.5rem 1.75rem 1.75rem;
+}
+
+@media (max-width: 600px) {
+  .confirm-header { padding: 2rem 1.25rem 1.5rem; }
+  .receipt-rows   { padding: 0 1.25rem; }
+  .receipt-header,
+  .progress-steps,
+  .save-notice,
+  .confirm-actions { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .confirm-header h1 { font-size: 1.5rem; }
+}
